@@ -27,7 +27,7 @@
   //Last few options
   curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/api");
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json', 'Voat-ApiKey: 4yIjhjWsMTeesLjLn9kThQ==' ));
+    'Content-Type: application/json', 'Voat-ApiKey: ' ));
   //--- 
 
   $res = curl_exec ($ch);
