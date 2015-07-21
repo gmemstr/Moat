@@ -7,8 +7,9 @@ body
 {
 	background: #eee;
 	color: #333;
-	font: 16px Sans-Serif;
-	padding: 50px;
+	font-family: 'Roboto', sans-serif;
+	font: 16px;
+	/*padding: 50px;*/
 }
 h1
 {
@@ -32,6 +33,7 @@ h2
 	width: 75%;
 	height: 50px;
 	box-shadow: 2px 2px 5px #888888;
+	font-weight: 400;
 }
 a
 {
@@ -42,4 +44,55 @@ a
    display: block;
    margin: 5px 0;
    line-height: 5px;
+}
+#down {
+	font-size: 2em;
+	color: red;
+	margin:0 auto;
+	background-color: #F0F0F0;
+	padding: 8px;
+	padding-top: 10px;
+	width: 75%;
+	height: 50px;
+	box-shadow: 2px 2px 5px #888888;
+	text-align: center;
+}
+#feedback { 
+  height: 104px; 
+  width: 104px; 
+  position: fixed; 
+  top: 10px;
+}
+
+#feedback a { 
+  display: block; 
+  background: #888888; 
+  height: 15px; 
+  width: 70px; 
+  padding: 8px 16px;
+  color: #fff; 
+  font-size: 17px; 
+  font-weight: 300; 
+  text-decoration: none; 
+}
+
+#feedback a:hover { 
+  background: #333; 
+}
+#faq{
+	margin:0 auto;
+	padding: 8px;
+	padding-top: 10px;
+	width: 40%;
+	height: 50px;
+	font-weight: 400;
+	text-align: center;
+}
+#footer{
+	margin:0 auto;
+	padding-top: 20px;
+	width: 40%;
+	height: 50px;
+	font-weight: 400;
+	text-align: center;
 }
