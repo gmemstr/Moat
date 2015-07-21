@@ -1,68 +1,87 @@
-  <!doctype html>
-  <html>
+<!doctype html>
+<html>
 
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/styles.css"> 
-    <title>Moat - Mobile Voat Browser</title>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style/styles.css"> 
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,400italic' rel='stylesheet' type='text/css'>
+  <title>Moat - Mobile Voat Browser</title>
 
-  <body>
-    <h1>Moat - Mobile Voat Browser (/v/API placeholder)</h1>
-    <?php
+</head>
 
-    //error_reporting(0);
+<body>
+  <div id="feedback">
+    <a href="about/">ABOUT</a>
+  </div>
 
+  <h1>Moat - Mobile Voat (/v/all placeholder)</h1>
+  <?php
+  $cache = "chached.json"; //cache file
+  $cacheTime = date("i", fileatime($cache)); //modified date of file
+
+  error_reporting(0);
+
+//Refresh IF: Time = h:30,h:00, file doesn't exist, if nothing is in file
+  if ($cacheTime == 30 || $cacheTime == 0 || !file_exists($cache) || file_get_contents($cache) == null){
     $ch = curl_init();
 
-  // cURL Options
+//cURL Options
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_VERBOSE, 1); 
 
-  //SSL Stuff
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //<- TEMPORARY
-  //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-  //curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "\\cert\\voatcert.crt");
+//SSL Stuff
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //<- TEMPORARY
+//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+//curl_setopt($ch, CURLOPT_CAINFO, getcwd() . "\\cert\\voatcert.crt");
 
-  //Last few options
-  curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/api");
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json', 'Voat-ApiKey: ' ));
-  //--- 
+//Last few options
+curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/all"); //Placeholder sv
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+  'Content-Type: application/json', 'Voat-ApiKey: Put_Your_Own_Key_Here' ));
+//--- 
 
-  $res = curl_exec ($ch);
-  curl_close ($ch);
+$res = curl_exec ($ch);
+file_put_contents($cache, $res);
+curl_close ($ch);
+}else{ //If file is up to date, found, and not empty
+  $res = file_get_contents($cache);
+}
 
-  //Debug echo $res;
+$jdecode = json_decode($res, true); //decode the json into an array
 
-  $jdecode = json_decode($res, true);
-  //print_r($jdecode);
-  /*$title = $jdecode["title"];
-  $sub = $jdecode["subverse"];
-  $id = $jdecode["id"];
-  $name = $jdecode["userName"];
-  $likes = $jdecode["upVotes"];
-  $dislikes = $jdecode["downVotes"];*/
+if ($jdecode == null){ //If Voat is down or API mucks up
+  echo '<div id="down">Voat seems to be down.</div>';
+}
 
-  for($i = 0; $i < sizeof($jdecode['data']); $i++){
+for($i = 0; $i < sizeof($jdecode['data']); $i++){ //basic for loop
 
-    if ($jdecode['data'][$i]['title'] == null){
-    //Do nothing
-    }
-    else{
-      echo '<div id="post">';
-
-      echo '<a href=https://fakevout.azurewebsites.net/v/' . $jdecode['data'][$i]['subverse'] . 
-      '/comments/' . $jdecode['data'][$i]['id'] . '>' . $jdecode['data'][$i]['title'] . '</a><br>';
-
-      echo '<a href=https://fakevout.azurewebsites.net/user/' . $jdecode['data'][$i]['userName'] . 
-      '>' . $jdecode['data'][$i]['userName'] . '</a> | ' . $jdecode['data'][$i]['upVotes'] . ' &#8593; '
-       . $jdecode['data'][$i]['downVotes'] . ' &#8595;';
-
-      echo '</div><div id=spacer></div>';
-    }
+  if ($jdecode['data'][$i]['title'] == null){
+//In case title is null, so it doesn't generate empty posts
   }
-  ?>
+  else{
+
+/* Generates page of posts
+* Format: 
+* Title (Subverse)
+* Poster name | Upvotes Downvotes
+*/
+echo '<div id="post">';
+echo '<a href=https://fakevout.azurewebsites.net/v/' . $jdecode['data'][$i]['subverse'] . 
+'/comments/' . $jdecode['data'][$i]['id'] . '>' . $jdecode['data'][$i]['title'] . '</a> ('
+  .$jdecode['data'][$i]['subverse'].')<br>';
+
+echo '<a href=https://fakevout.azurewebsites.net/user/' . $jdecode['data'][$i]['userName'] . 
+'>' . $jdecode['data'][$i]['userName'] . '</a> | ' . $jdecode['data'][$i]['upVotes'] . ' &#8593; '
+. $jdecode['data'][$i]['downVotes'] . ' &#8595;';
+
+echo "</div>\r\n<div id=spacer></div>";
+}
+}
+?>
+
+<div id="footer">
+  <p>Moat &copy; Gabriel Simmer 2015</p>
+</div>
 
 </body>
 
