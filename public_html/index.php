@@ -18,11 +18,12 @@
   <?php
   $cache = "chached.json"; //cache file
   $cacheTime = date("i", fileatime($cache)); //modified date of file
+  $time = date("i");
 
   error_reporting(0);
 
-//Refresh IF: Time = h:30,h:00, file doesn't exist, if nothing is in file
-  if ($cacheTime == 30 || $cacheTime == 0 || !file_exists($cache) || file_get_contents($cache) == null){
+//Refresh IF: time since last mod is more than 10 minutes, file doesn't exist, if nothing is in file
+  if (($cacheTime - $time) > 10 || !file_exists($cache) || file_get_contents($cache) == null){
     $ch = curl_init();
 
 //cURL Options
@@ -37,7 +38,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //<- TEMPORARY
 //Last few options
 curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/all"); //Placeholder sv
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-  'Content-Type: application/json', 'Voat-ApiKey: Put_Your_Own_Key_Here' ));
+  'Content-Type: application/json', 'Voat-ApiKey: lNic6rtZISv32D0jqofslA==' ));
 //--- 
 
 $res = curl_exec ($ch);
@@ -66,8 +67,7 @@ for($i = 0; $i < sizeof($jdecode['data']); $i++){ //basic for loop
 * Poster name | Upvotes Downvotes
 */
 echo '<div id="post">';
-echo '<a href=https://fakevout.azurewebsites.net/v/' . $jdecode['data'][$i]['subverse'] . 
-'/comments/' . $jdecode['data'][$i]['id'] . '>' . $jdecode['data'][$i]['title'] . '</a> ('
+echo '<a href=post.php?sub=' . $jdecode['data'][$i]['subverse'] . "&id=" . $jdecode['data'][$i]['id'] . '>' . $jdecode['data'][$i]['title'] . '</a> ('
   .$jdecode['data'][$i]['subverse'].')<br>';
 
 echo '<a href=https://fakevout.azurewebsites.net/user/' . $jdecode['data'][$i]['userName'] . 
