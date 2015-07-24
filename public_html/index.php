@@ -38,7 +38,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //<- TEMPORARY
 //Last few options
 curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/all"); //Placeholder sv
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-  'Content-Type: application/json', 'Voat-ApiKey: lNic6rtZISv32D0jqofslA==' ));
+  'Content-Type: application/json', 'Your_Own_Key_Here' ));
 //--- 
 
 $res = curl_exec ($ch);
