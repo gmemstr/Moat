@@ -34,9 +34,48 @@ box-shadow:2px 2px 5px #888;
 font-weight:400
 }
 
+/*A whole bunch of
+postcontent variable and
+styling*/
 #postcontent {
 height:50%;
 }
+#postcontent h1 {
+font-size: 2.0em;
+text-align: left;
+}
+#postcontent h2 {
+font-size: 1.3em;
+text-align: left;
+}
+#postcontent pre { /* So proud of this */
+padding: 2px;
+border: 1px dotted #B0B0B0;
+background-color: #F8F8F8;
+width: 50%;
+}
+#postcontent hr {
+width: 50%;
+height: 1px;
+background-color: #000;
+border: 0; 
+}
+#postcontent a{
+text-decoration:none;
+color: #11B1FF;
+  -o-transition:.2s;
+  -ms-transition:.2s;
+  -moz-transition:.2s;
+  -webkit-transition:.2s;
+  /* ...and now for the proper property */
+  transition:.2s;
+}
+#postcontent a:hover{
+text-decoration:none;
+color: #A0E0FF;
+}
+
+/* --- */
 
 #comment {
 width: 65%;
@@ -45,7 +84,7 @@ height: 100%;
 
 a {
 text-decoration:none;
-color:#5F5F5F
+color:#5F5F5F;
 }
 
 a:hover {
