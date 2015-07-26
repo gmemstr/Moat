@@ -67,12 +67,16 @@ color: #11B1FF;
   -ms-transition:.2s;
   -moz-transition:.2s;
   -webkit-transition:.2s;
-  /* ...and now for the proper property */
   transition:.2s;
 }
 #postcontent a:hover{
 text-decoration:none;
 color: #A0E0FF;
+}
+#postcontent img{
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
 
 /* --- */
