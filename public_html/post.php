@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#33FF00">
     <link rel="stylesheet" href="style/styles.css"> 
     <title>Moat - View Post</title>
   </head>
@@ -10,7 +11,7 @@
   <body>
     <h1>Moat - Mobile Voat</h1>
 
-      <div id="feedback">
+  <div id="feedback">
     <a href="/moat/">BACK</a>
   </div>
     <?php
@@ -31,7 +32,7 @@
   //Last few options
   curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/" . $_GET['sub'] . "/" . $_GET['id'] . "/comments");
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json', 'Voat-ApiKey: lNic6rtZISv32D0jqofslA==' ));
+    'Content-Type: application/json', 'Voat-ApiKey: V3abMG9I9FAEKwVLsLJBGA==' ));
 
   $ch2 = curl_init();
 
@@ -47,7 +48,7 @@
   //Last few options
   curl_setopt($ch2, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/" . $_GET['sub'] . "/" . $_GET['id'] );
   curl_setopt($ch2, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json', 'Voat-ApiKey: lNic6rtZISv32D0jqofslA==' ));
+    'Content-Type: application/json', 'Voat-ApiKey: Your_Api_Key_Here' ));
   //--- 
 
   $res = curl_exec ($ch);
@@ -63,18 +64,31 @@
 
   echo '<div id="postview">';
 
-  echo '<div id="postcontent">' . $jdecode2['data']['formattedContent'] . '</div><div id="spacer2"></div>';
+if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'youtube') == false){
+    echo '<div id="postcontent"><img src="' . $jdecode2['data']['url'] . '"></div><div id="spacer2"></div>';
+}
+else if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'youtube') == true){
+  echo '<div id="postcontent">YouTube Support Soon</div>'. '</div><div id="spacer2"></div>';
+}
+else if ($jdecode2['data']['url'] == null){
+echo '<div id="postcontent">' . $jdecode2['data']['formattedContent'] . '</div><div id="spacer2"></div>';
+}
 
   for($i = 0; $i < sizeof($jdecode['data']); $i++){
+    if($jdecode['data'][$i]['userName'] == "deleted"){
+
+    }
+    else{
     echo "\r\n";
 
     echo '<div id="comment">';
 
     echo $jdecode['data'][$i]['userName'] . " | " . $jdecode['data'][$i]['date'] . "<br>";
 
-    echo $jdecode['data'][$i]['content'];
+    echo $jdecode['data'][$i]['formattedContent'];
 
     echo "</div><div id='spacer'></div>";
+  }
   }
   ?>
   </div>
