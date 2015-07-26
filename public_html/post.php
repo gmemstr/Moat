@@ -32,7 +32,7 @@
   //Last few options
   curl_setopt($ch, CURLOPT_URL,"https://fakevout.azurewebsites.net/api/v1/v/" . $_GET['sub'] . "/" . $_GET['id'] . "/comments");
   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Content-Type: application/json', 'Voat-ApiKey: V3abMG9I9FAEKwVLsLJBGA==' ));
+    'Content-Type: application/json', 'Voat-ApiKey: Your_Api_Key_Here' ));
 
   $ch2 = curl_init();
 
