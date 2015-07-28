@@ -64,11 +64,11 @@
 
   echo '<div id="postview">';
 
-if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'youtube') == false){
+if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'png') == true){
     echo '<div id="postcontent"><img src="' . $jdecode2['data']['url'] . '"></div><div id="spacer2"></div>';
 }
-else if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'youtube') == true){
-  echo '<div id="postcontent">YouTube Support Soon</div>'. '</div><div id="spacer2"></div>';
+else if ($jdecode2['data']['url'] != null && strpos($jdecode2['data']['url'],'png') == false){
+  echo '<div id="postcontent"><a href="'.$jdecode2["data"]["url"] . '">Click to view content</a></div><div id="spacer2"></div>';
 }
 else if ($jdecode2['data']['url'] == null){
 echo '<div id="postcontent">' . $jdecode2['data']['formattedContent'] . '</div><div id="spacer2"></div>';
@@ -92,7 +92,6 @@ echo '<div id="postcontent">' . $jdecode2['data']['formattedContent'] . '</div><
   }
   ?>
   </div>
-
 </body>
 
 </html>

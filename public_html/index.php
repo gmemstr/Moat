@@ -10,7 +10,7 @@ if ($_GET['v'] != null) $sv = $_GET['v'];
    <meta name="theme-color" content="#33FF00">
   <link rel="stylesheet" href="style/styles.css"> 
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300,400italic' rel='stylesheet' type='text/css'>
-  <title>Moat - Mobile Voat Browser</title>
+  <title>Moat - /v/<?php echo $sv; ?></title>
 
 </head>
 
@@ -81,7 +81,6 @@ echo "</div>\r\n<div id=spacer></div>";
 }
 }
 ?>
-
 <div id="footer">
   <p>Moat &copy; Gabriel Simmer 2015</p>
 </div>
